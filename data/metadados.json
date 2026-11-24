@@ -1,0 +1,61 @@
+{
+  "recorte": "Estado da Bahia — todos os 417 municípios (IBGE 2025)",
+  "total_municipios": 417,
+  "total_pixels_validos": 672466,
+  "referencia_percentis": "Todos os pixels com CE, PST e pH válidos dentro dos 417 municípios da Bahia (IBGE 2025)",
+  "percentil95_referencia": {
+    "ce": 1.016037940979004,
+    "pst": 1.8132352828979492,
+    "ph": 6.865673899650574
+  },
+  "mediana_referencia": {
+    "ce": 0.013346120715141296,
+    "pst": 0.17746707051992416,
+    "ph": 5.519583225250244
+  },
+  "percentil25_referencia": {
+    "ce": 0.011479562846943736,
+    "pst": 0.08158669620752335,
+    "ph": 5.177950382232666
+  },
+  "percentil75_referencia": {
+    "ce": 0.046989357098937035,
+    "pst": 0.8426351100206375,
+    "ph": 5.980118274688721
+  },
+  "correlacao_spearman_medianas_municipais": {
+    "ce_mediana": {
+      "ce_mediana": 1.0,
+      "pst_mediana": 0.6643,
+      "ph_mediana": 0.5423
+    },
+    "pst_mediana": {
+      "ce_mediana": 0.6643,
+      "pst_mediana": 1.0,
+      "ph_mediana": 0.3107
+    },
+    "ph_mediana": {
+      "ce_mediana": 0.5423,
+      "pst_mediana": 0.3107,
+      "ph_mediana": 1.0
+    }
+  },
+  "metodologia": "Centros dos pixels dentro dos municípios do IBGE 2025; mapas preditivos, ~1 km, 0–30 cm. P95 estadual não é limite de risco. Pixels em EPSG:4326 não foram ponderados por área e possuem dependência espacial.",
+  "malha": "IBGE 2025 — BA_Municipios_2025.zip",
+  "fonte_ibge": "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2025/UFs/BA/",
+  "fonte_embrapa": "https://geoinfo.dados.embrapa.br/",
+  "limites_classicos_apenas_informativos": {
+    "ce_ds_m": 4,
+    "pst_pct": 15
+  },
+  "resolucao": "aproximadamente 1 km",
+  "profundidade_cm": "0–30",
+  "versao": "0.4.0",
+  "arquivos_fonte": {
+    "ce": "Embrapa CE 0–30 cm",
+    "pst": "Embrapa saturação por sódio 0–30 cm",
+    "ph": "Embrapa pH 0–30 cm"
+  },
+  "referencia": "Bahia — 417 municípios (IBGE 2025)",
+  "aviso_cientifico": "Os mapas são estimativas. Não substituem amostras de solo nem permitem recomendar irrigação ou corretivos."
+}

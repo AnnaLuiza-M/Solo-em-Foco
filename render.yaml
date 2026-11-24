@@ -1,0 +1,8 @@
+# Exemplo inicial para deploy via Render. NÃO indica que o site esteja publicado.
+services:
+  - type: web
+    name: solo-em-foco-bahia
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health

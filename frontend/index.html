@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#214b3c">
+  <meta name="description" content="Solo em Foco: entenda CE, PST e pH estimados e analise os 417 municípios da Bahia com dados da Embrapa.">
+  <title>Solo em Foco | Bahia</title>
+  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+<body>
+<header class="header">
+  <div class="shell headrow">
+    <a class="brand" href="#inicio" aria-label="Solo em Foco — início"><span class="brandIcon">◈</span><span>SOLO <b>EM FOCO</b><small>Bahia • 417 municípios</small></span></a>
+    <nav role="tablist" aria-label="Módulos do site">
+      <button class="navtab active" id="navConsulta" data-tab="consulta" role="tab" aria-controls="tabConsulta" aria-selected="true">Consultar meu solo</button>
+      <button class="navtab" id="navAnalise" data-tab="analise" role="tab" aria-controls="tabAnalise" aria-selected="false">Análise de dados</button>
+    </nav>
+  </div>
+</header>
+<main class="shell">
+  <section class="hero" id="inicio">
+    <div class="eyebrow">SOLO EM FOCO · PROJETO ACADÊMICO</div>
+    <h1>Informação sobre o solo <em>que faz sentido.</em></h1>
+    <p>Consulte indicadores químicos estimados para um ponto da Bahia, compreenda como eles se relacionam e explore os padrões dos 417 municípios.</p>
+    <div id="status" class="status" role="status" aria-live="polite">Carregando referência estadual...</div>
+  </section>
+
+  <div id="tabConsulta" class="tabPanel" role="tabpanel" aria-labelledby="navConsulta">
+    <section class="section" id="consulta">
+      <div class="sec-title"><div><span class="eyebrow">01 · CONSULTA POR LOCALIZAÇÃO</span><h2>Conheça os indicadores do seu local</h2></div><span class="subtle">Embrapa · Estimativas de 0–30 cm</span></div>
+      <div class="two-col">
+        <article class="panel">
+          <div id="map" aria-label="Mapa dos municípios da Bahia"></div>
+          <p class="maptip">Clique em um ponto do mapa ou digite as coordenadas. O mapa-base depende de internet.</p>
+          <div class="actions"><button class="primary" id="botaoLocalizacao">◎ Usar localização</button><button class="outline" id="botaoExemplo">Testar em Juazeiro</button></div>
+          <div class="coords"><label>Latitude <input id="lat" type="number" step="any" value="-9.513883"></label><label>Longitude <input id="lon" type="number" step="any" value="-40.307956"></label><button id="botaoConsultar">Consultar</button></div>
+        </article>
+        <article class="panel resultsTop">
+          <div class="boxhead"><span class="tag">RESULTADO DO MAPA</span><span class="note" id="nomeMunicipio">Aguardando consulta</span></div>
+          <h3 id="tituloConsulta">Selecione uma localização</h3>
+          <p class="secondary" id="introducaoConsulta">A interpretação aparecerá após consultar o mapa.</p>
+          <div class="metrics">
+            <div class="metric"><label>CE estimada</label><strong id="valorCe">—</strong><small>dS/m · sais solúveis</small></div>
+            <div class="metric"><label>PST estimada</label><strong id="valorPst">—</strong><small>% · sódio trocável</small></div>
+            <div class="metric"><label>pH estimado</label><strong id="valorPh">—</strong><small>acidez / alcalinidade</small></div>
+          </div>
+          <div class="resultKey"><span class="small-label">LEITURA INICIAL</span><p id="leituraInicial">Os valores serão exibidos aqui.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="interpretacoesTitulo">
+      <div class="sec-title"><div><span class="eyebrow">02 · ENTENDA SEU SOLO</span><h2 id="interpretacoesTitulo">O que esses indicadores dizem juntos?</h2></div></div>
+      <p class="sec-intro">Em vez de mostrar números isolados, explicamos as três relações e por que elas podem importar para o agricultor.</p>
+      <div class="joint-grid" id="relacoesConjuntas">
+        <article class="joint-card skeleton"><h3>CE + PST</h3><p>Selecione uma localização para ver a interpretação.</p></article>
+        <article class="joint-card skeleton"><h3>PST + pH</h3><p>A relação com o sódio será explicada aqui.</p></article>
+        <article class="joint-card skeleton"><h3>CE + pH</h3><p>A relação entre sais e acidez será explicada aqui.</p></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="comparacaoBahiaTitulo">
+      <div class="sec-title"><div><span class="eyebrow">03 · COMPARE COM A BAHIA</span><h2 id="comparacaoBahiaTitulo">Como esse ponto se compara ao estado?</h2></div></div>
+      <p class="sec-intro">As referências abaixo são estatísticas de todos os pixels válidos dos 417 municípios. Uma posição alta na distribuição <b>não significa risco agronômico</b>.</p>
+      <div class="state-grid" id="comparacaoEstadual"><div class="panel muted-placeholder">Faça uma consulta para ver a comparação estadual de CE, PST e pH.</div></div>
+      <div class="recommend" id="quadroOrientacao"><span class="small-label">ANTES DE TOMAR DECISÕES</span><p id="orientacaoConsulta">Estimativas regionais não substituem análise laboratorial da propriedade nem orientação técnica.</p><p class="secondary" id="notaConsulta">Resolução aproximada de 1 km · profundidade 0–30 cm</p></div>
+    </section>
+  </div>
+
+  <div id="tabAnalise" class="tabPanel" role="tabpanel" aria-labelledby="navAnalise" hidden>
+    <section class="section" id="analise">
+      <div class="sec-title"><div><span class="eyebrow">MÓDULO DE ANÁLISE ESTATÍSTICA</span><h2>O que os dados da Bahia revelam?</h2></div><span class="subtle">417 municípios · resultados exploratórios</span></div>
+      <div class="three-up">
+        <div class="panel stat"><span class="small-label">MUNICÍPIOS</span><strong id="qMunicipios">417</strong><small>IBGE 2025</small></div>
+        <div class="panel stat"><span class="small-label">P95 ESTADUAL · CE</span><strong id="p95ce">—</strong><small>dS/m · não é limite de risco</small></div>
+        <div class="panel stat"><span class="small-label">P95 ESTADUAL · PST</span><strong id="p95pst">—</strong><small>% · não é limite de risco</small></div>
+      </div>
+      <div class="panel scatter-panel">
+        <div class="scatter-head"><div><span class="small-label">RELAÇÃO ENTRE MUNICÍPIOS</span><h3>Gráfico de dispersão</h3><p class="secondary">Cada ponto representa a mediana estimada de um município. Passe o mouse sobre os pontos para identificar municípios.</p></div><label for="scatterPair">Indicadores <select id="scatterPair"><option value="ce_pst">CE × PST</option><option value="ce_ph">CE × pH</option><option value="pst_ph">PST × pH</option></select></label></div>
+        <div id="plotContainer" class="plot-container"><svg id="scatterPlot" viewBox="0 0 760 360" role="img" aria-label="Gráfico de dispersão entre os indicadores dos 417 municípios da Bahia"><text x="20" y="40">Carregando dados…</text></svg></div>
+        <div class="correlation-inline"><strong id="corrSelected">Correlação: —</strong><p id="corrExplanation">A correlação será exibida com os dados calculados.</p></div>
+        <p class="maptip">Eixos dos indicadores CE/PST exibidos em escala log(1 + valor) para facilitar a visualização. As legendas e detalhes mostram os valores originais.</p>
+      </div>
+      <div class="three-up corr-cards"><div class="panel stat"><span class="small-label">SPEARMAN · CE × PST</span><strong id="corrCePst">—</strong></div><div class="panel stat"><span class="small-label">SPEARMAN · CE × pH</span><strong id="corrCePh">—</strong></div><div class="panel stat"><span class="small-label">SPEARMAN · PST × pH</span><strong id="corrPstPh">—</strong></div></div>
+      <div class="two-col analise-panels">
+        <article class="panel"><h3>Municípios com maior CE mediana</h3><p class="secondary">Ranking apenas dos valores estimados, não de solo comprovadamente salino.</p><div class="barlist" id="rankingCE"></div></article>
+        <article class="panel"><h3>CE e PST relativamente altas no mesmo lugar</h3><p class="secondary">Maior proporção de pixels acima do P95 estadual dos dois indicadores simultaneamente.</p><div class="barlist" id="rankingAmbos"></div></article>
+      </div>
+    </section>
+    <section class="section" id="comparacao"><div class="sec-title"><div><span class="eyebrow">COMPARE LOCALIDADES</span><h2>Município contra município</h2></div></div><div class="panel"><div class="compare-input"><label>Primeiro município<select id="cityA"></select></label><label>Segundo município<select id="cityB"></select></label><button class="primary" id="compareBtn">Comparar</button></div><div id="comparison" class="comparison"><p class="secondary">Escolha dois municípios para comparar CE, PST, pH e percentis.</p></div></div>
+      <p class="download-line"><a href="/api/exportar/municipios.csv" download>Baixar estatísticas dos 417 municípios (CSV)</a></p>
+    </section>
+  </div>
+  <section class="section disclaimer"><h3>Como interpretar corretamente</h3><p>Os valores são <b>estimativas de mapas preditivos da Embrapa</b>, com resolução aproximada de 1 km e profundidade de 0–30 cm. Não constituem diagnóstico de uma propriedade rural. Percentis indicam posição relativa na Bahia, não risco. Correlações descrevem associações e não demonstram causalidade. Não altere irrigação, corretivos ou adubação sem análise de solo e orientação técnica.</p></section>
+</main>
+<footer><div class="shell footrow"><span><b>SOLO EM FOCO</b> · Protótipo acadêmico</span><span>Fontes: <a href="https://geoinfo.dados.embrapa.br/" target="_blank" rel="noopener">Embrapa</a> · <a href="https://www.ibge.gov.br/" target="_blank" rel="noopener">IBGE</a></span></div></footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="/app.js"></script>
+</body>
+</html>
